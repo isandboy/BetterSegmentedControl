@@ -278,7 +278,7 @@ import Foundation
     /// - Parameters:
     ///   - index: The new index
     ///   - animated: (Optional) Whether the change should be animated or not. Defaults to true.
-    public func setIndex(_ index: UInt, animated: Bool = true) {
+    open func setIndex(_ index: UInt, animated: Bool = true) {
         guard normalSegments.indices.contains(Int(index)) else {
             return
         }
