@@ -90,6 +90,8 @@ import Foundation
                     announcesValueImmediately = value
                 case let .panningDisabled(value):
                     panningDisabled = value
+                case let .animated(value):
+                    animated = value
                 case let .backgroundColor(value):
                     backgroundColor = value
                 case let .cornerRadius(value):
@@ -108,6 +110,8 @@ import Foundation
     @IBInspectable public var announcesValueImmediately: Bool = true
     /// Whether the the control should ignore pan gestures. Defaults to false
     @IBInspectable public var panningDisabled: Bool = false
+    /// Whether the change should be animated or not. Defaults to true
+    @IBInspectable public var animated: Bool = true
     /// The control's and indicator's corner radii
     @IBInspectable public var cornerRadius: CGFloat {
         get {
@@ -301,7 +305,7 @@ import Foundation
                            delay: 0.0,
                            usingSpringWithDamping: bouncesOnChange ? Animation.springDamping : 1.0,
                            initialSpringVelocity: 0.0,
-                           options: [UIView.AnimationOptions.beginFromCurrentState, UIView.AnimationOptions.curveEaseOut],
+                           options: [UIViewAnimationOptions.beginFromCurrentState, UIViewAnimationOptions.curveEaseOut],
                            animations: {
                             () -> Void in
                             self.moveIndicatorView()
@@ -336,7 +340,7 @@ import Foundation
     // MARK: Action handlers
     @objc private func tapped(_ gestureRecognizer: UITapGestureRecognizer!) {
         let location = gestureRecognizer.location(in: self)
-        setIndex(nearestIndex(toPoint: location))
+        setIndex(nearestIndex(toPoint: location), animated: animated)
     }
     @objc private func panned(_ gestureRecognizer: UIPanGestureRecognizer!) {
         guard !panningDisabled else {

@@ -19,7 +19,7 @@ public enum BetterSegmentedControlOption {
     case alwaysAnnouncesValue(Bool)
     case announcesValueImmediately(Bool)
     case panningDisabled(Bool)
-    
+    case animated(Bool)
     /* Other */
     case backgroundColor(UIColor)
     case cornerRadius(CGFloat)
